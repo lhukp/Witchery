@@ -286,33 +286,33 @@ end
 
 local function onevent(self, event, arg1, ...)
 
-		if(login and ((event == "ADDON_LOADED" and addon == arg1) or (event == "PLAYER_LOGIN"))) then
-				login = nil
-        Init()
-				f:UnregisterEvent("ADDON_LOADED")
-        f:UnregisterEvent("PLAYER_LOGIN")
-    end
+	if(login and ((event == "ADDON_LOADED" and addon == arg1) or (event == "PLAYER_LOGIN"))) then
+		login = nil
+		Init()
+		f:UnregisterEvent("ADDON_LOADED")
+		f:UnregisterEvent("PLAYER_LOGIN")
+	end
 
-		if(event == "BAG_UPDATE") then
-			if(baginit) then
-				InitBags()
-			elseif(onceafterbaginit) then
-				if( not sortprogress ) then
-					SortShards()
-				end
-				onceafterbaginit = nil
+	if(event == "BAG_UPDATE") then
+		if(baginit) then
+			InitBags()
+		elseif(onceafterbaginit) then
+			if( not sortprogress ) then
+				SortShards()
+			end
+			onceafterbaginit = nil
+		end
+	end
+
+	if(event == "PLAYER_REGEN_ENABLED") then
+		local soulShardCount = GetItemCount(soulShardItemID)
+		if( soulShardCount > TOTAL_SHARDS ) then
+			sortnotdone = true
+			if( not sortprogress ) then
+				SortShards()
 			end
 		end
-
-		if(event == "PLAYER_REGEN_ENABLED") then
-			local soulShardCount = GetItemCount(soulShardItemID)
-			if( soulShardCount > TOTAL_SHARDS ) then
-				sortnotdone = true
-				if( not sortprogress ) then
-					SortShards()
-				end
-			end
-		end
+	end
 
 end
 

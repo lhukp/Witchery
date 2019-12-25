@@ -29,87 +29,85 @@ local function lastChar(str)
 end
 
 local function GetDemonMacroName(str)
-    local i, j, l, len, tbl, section, rtn, floor, lower = 0, 1, 0, 3, {}, {}, "", math.floor, string.lower
+  local i, j, l, len, tbl, section, rtn, floor, lower = 0, 1, 0, 3, {}, {}, "", math.floor, string.lower
 
-    str = F.killws(str)
+  str = F.killws(str)
+  section.first = 1
+  section.mid = 2
+  section.last = 3
 
-    section.first = 1
-    section.mid = 2
-    section.last = 3
+  for c in str:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
+    table.insert(tbl, c)
+    l=l+1
+  end
 
-    for c in str:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
-        table.insert(tbl, c)
-        l=l+1
+  if l == len then return lower(str) end
+  section.mid = floor(l/2+.5)
+  section.last = l
+
+  for _, str in pairs(tbl) do
+    if j == section.first or j == section.mid or j == section.last then
+      rtn = rtn .. tbl[j]
     end
+    j=j+1
+  end
 
-    if l == len then return lower(str) end
+  while j<len do
+    rtn = rtn .. lastChar(str)
+    i=i+1
+  end
 
-    section.mid = floor(l/2+.5)
-    section.last = l
-
-    for _, str in pairs(tbl) do
-        if j == section.first or j == section.mid or j == section.last then
-            rtn = rtn .. tbl[j]
-        end
-        j=j+1
-    end
-
-    while j<len do
-        rtn = rtn .. lastChar(str)
-        i=i+1
-    end
-
-    return lower(rtn)
+  return lower(rtn)
 end
 
 local function PlaceActionMacro(macroName, slotId)
-    if GetActionInfo(slotId) ~= nil then
-        PickupAction(slotId)
-        ClearCursor()
-    end
-    PickupMacro(macroName, slotId)
+  if GetActionInfo(slotId) ~= nil then
+    PickupAction(slotId)
+    ClearCursor()
+  end
+  PickupMacro(macroName, slotId)
+  PlaceAction(slotId)
+  -- no macro? try fallback-macro
+  if GetActionInfo(slotId) == nil then
+    PickupMacro(conf.fallbackMacro .. tostring(slotId))
     PlaceAction(slotId)
-    -- no macro? try fallback-macro
-    if GetActionInfo(slotId) == nil then
-        PickupMacro(conf.fallbackMacro .. tostring(slotId))
-        PlaceAction(slotId)
-    end
+  end
 end
 
 local function PlaceMinionActionMacro(macroName, slotId)
-    if type(slotId) == "number" then slotId = {conf.slotId} end
-    if type(slotId) == "table" then
-        for k,v in pairs(slotId) do
-            PlaceActionMacro(GetDemonMacroName(macroName) .. tostring(v), v)
-        end
+  if type(slotId) == "number" then slotId = {conf.slotId} end
+  if type(slotId) == "table" then
+    for k,v in pairs(slotId) do
+      PlaceActionMacro(GetDemonMacroName(macroName) .. tostring(v), v)
     end
+  end
 end
 
 local function PlaceMinionMacro(family)
-    if inCombat == true then return end
+  if inCombat == true then return end
 
-    if family == DEMON_IMP or
-       family == DEMON_VOIDWALKER or
-       family == DEMON_SUCCUBUS or
-       family == DEMON_FELHUNTER or
-       family == DEMON_FELGUARD or
-       family == DEMON_INFERNO or
-       family == DEMON_DOOMGUARD then
-        PlaceMinionActionMacro(string.lower(family), conf.slotId)
-    end
+  if family == DEMON_IMP or
+     family == DEMON_VOIDWALKER or
+     family == DEMON_SUCCUBUS or
+     family == DEMON_FELHUNTER or
+     family == DEMON_FELGUARD or
+     family == DEMON_INFERNO or
+     family == DEMON_DOOMGUARD then
+    PlaceMinionActionMacro(string.lower(family), conf.slotId)
+  end
 end
 
 local function MinionDismissedCallback()
-    if inCombat == true then return end
+  if inCombat == true then return end
 
-    slotId = conf.slotId
-    if type(slotId) == "number" then slotId = {conf.slotId} end
-    if type(slotId) == "table" then
-        for k,v in pairs(slotId) do
-            PickupAction(v)
-            ClearCursor()
-        end
+  slotId = conf.slotId
+  if type(slotId) == "number" then slotId = {conf.slotId} end
+  if type(slotId) == "table" then
+    for k,v in pairs(slotId) do
+      PickupAction(v)
+      ClearCursor()
     end
+  end
 end
 
 local function ActionbarHasMacro()
@@ -117,34 +115,34 @@ local function ActionbarHasMacro()
   local hasMacro = false
   if type(slotId) == "number" then slotId = {conf.slotId} end
   if type(slotId) == "table" then
-      for k,v in pairs(slotId) do
-          PickupAction(v)
-          macro, index = GetCursorInfo()
-          if (macro == "macro") then hasMacro = true end;
-          if macro ~= nill then
-            PlaceAction(v)
-          end
+    for k,v in pairs(slotId) do
+      PickupAction(v)
+      macro, index = GetCursorInfo()
+      if (macro == "macro") then hasMacro = true end;
+      if macro ~= nill then
+        PlaceAction(v)
       end
+    end
   end
   return hasMacro == true and true or false
 end
 
 local function MinionChangedCallback(guid)
-    if guid == nil then
-        MinionDismissedCallback()
-    else
-        local family = UnitCreatureFamily("pet")
-        PlaceMinionMacro(family);
-    end
+  if guid == nil then
+    MinionDismissedCallback()
+  else
+    local family = UnitCreatureFamily("pet")
+    PlaceMinionMacro(family);
+  end
 end
 
 local function EnteringCombatCallback()
-    inCombat = true
+  inCombat = true
 end
 
 local function LeavingCombatCallback()
-    inCombat = false
-    MinionChangedCallback(UnitGUID("pet"))
+  inCombat = false
+  MinionChangedCallback(UnitGUID("pet"))
 end
 
 F.ShowDemonMacroName = function()
@@ -180,16 +178,16 @@ end)
 f:Hide()
 
 function f:UNIT_PET(unit)
-    local newGUID = UnitGUID("pet")
-    if newGUID ~= MINION_GUID or not ActionbarHasMacro() then
-        MinionChangedCallback(newGUID)
-        MINION_GUID = newGUID
-    end
+  local newGUID = UnitGUID("pet")
+  if newGUID ~= MINION_GUID or not ActionbarHasMacro() then
+    MinionChangedCallback(newGUID)
+    MINION_GUID = newGUID
+  end
 end
 
 function f:PLAYER_ENTERING_WORLD()
-    MINION_GUID = UnitGUID("pet")
-    f:UnregisterEvent("PLAYER_ENTERING_WORLD")
+  MINION_GUID = UnitGUID("pet")
+  f:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end
 
 -- function f:COMBAT_LOG_EVENT_UNFILTERED()
@@ -209,9 +207,9 @@ end
 -- end
 
 function f:PLAYER_REGEN_DISABLED()
-    EnteringCombatCallback()
+  EnteringCombatCallback()
 end
 
 function f:PLAYER_REGEN_ENABLED()
-    LeavingCombatCallback()
+  LeavingCombatCallback()
 end
