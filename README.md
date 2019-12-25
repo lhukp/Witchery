@@ -18,7 +18,11 @@ _classic_/Interface/AddOns
 ```
 Folder inside your World of Warcraft installation.
 
-##What it does
+## What it does
+
+Should make your gaming experience easier.
+
+### Slash commands (general)
 
 This addon provids the following general slash commands.
 
@@ -42,9 +46,11 @@ To start client support, eg. ticket
 /gm
 ```
 
-### The Warlock Module
+## Supported Casses
 
-## Soul Shards
+### Warlock
+
+#### Soul Shards
 
 This Addon can handle Soul Shards.
 
@@ -60,7 +66,7 @@ You can also us a shortcut.
 ```
 /wss s
 ```
-## Macros
+#### Macros
 
 tba
 
