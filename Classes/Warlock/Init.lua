@@ -8,9 +8,7 @@ local conf = C.Warlock
 local L = LibStub("AceLocale-3.0"):GetLocale(addon)
 
 local function WarlockCmd(msg, editbox)
- 	-- pattern matching that skips leading whitespace and whitespace between cmd and args
-	-- any whitespace at end of args is retained
- 	local _, _, cmd, args = string.find(msg, "%s?(%w+)%s?(.*)")
+  local _, _, cmd, args = string.find(msg, "%s?(%w+)%s?(.*)")
   if cmd == nil then cmd = "" end
 
 	if (cmd == "dmn" ) then
@@ -23,9 +21,7 @@ local function WarlockCmd(msg, editbox)
 end
 
 local function SsWarlockCmd(msg, editbox)
- 	-- pattern matching that skips leading whitespace and whitespace between cmd and args
-	-- any whitespace at end of args is retained
- 	local _, _, cmd, args = string.find(msg, "%s?(%w+)%s?(.*)")
+  local _, _, cmd, args = string.find(msg, "%s?(%w+)%s?(.*)")
   if cmd == nil then cmd = "" end
 
   if (cmd == "d" or cmd == "dell") then
