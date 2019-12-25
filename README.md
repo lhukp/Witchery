@@ -148,3 +148,5 @@ and so on ...
 ## Built With
 
 * [AceLocale-3.0](https://www.wowace.com/projects/ace3/pages/api/ace-locale-3-0) - Manages localization in addons
+
+> Pardon my English

@@ -15,13 +15,13 @@ Monk = 10
 Druid = 11
 Demon Hunter = 12
 ]]
-local localizedClass, englishClass, classIndex = UnitClass("player");
+local localizedClass, realClass, classIndex = UnitClass("player");
 
 G.caF = "|cff00FFFF%s|r"
-G.Ccolors = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[englishClass]
+G.Ccolors = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[realClass]
 
 C.LocalizedClass = localizedClass
-C.EnglishClass = englishClass
+C.RealClass = realClass
 C.ClassIndex = classIndex
 
 C.IsWarrior = C.ClassIndex == 1 and true or false

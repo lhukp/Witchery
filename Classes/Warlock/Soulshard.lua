@@ -6,7 +6,7 @@ if not( C.Warlock.Enabled and C.Warlock.Soulshard.Enabled ) then return end
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addon)
 
-local f = CreateFrame("Frame", addon..C.EnglishClass.."Soulshard", UIParent)
+local f = CreateFrame("Frame", addon..C.RealClass.."Soulshard", UIParent)
 
 local login = true
 local baginit = true

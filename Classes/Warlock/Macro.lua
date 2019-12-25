@@ -4,7 +4,7 @@ local C, F, G = unpack(ns)
 if not C.IsWarlock then return end
 if not( C.Warlock.Enabled and C.Warlock.Macro.Enabled ) then return end
 
-local f = CreateFrame("Frame", addon..C.EnglishClass.."Macro", UIParent)
+local f = CreateFrame("Frame", addon..C.RealClass.."Macro", UIParent)
 local L = LibStub("AceLocale-3.0"):GetLocale(addon)
 -- Get Macro config
 local conf = C.Warlock.Macro
