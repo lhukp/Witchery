@@ -4,7 +4,6 @@ local C, F, G = unpack(ns)
 if not C.IsWarlock then return end
 
 C.Warlock = {}
-
 -- Enables the warlock module
 C.Warlock.Enabled = true
 -- Enables warlock: soulshard
