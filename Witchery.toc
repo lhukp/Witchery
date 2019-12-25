@@ -1,0 +1,14 @@
+## Interface: 11303
+## Title: Witchery
+## Author: Onaona @ EU-Everlook
+## Notes: Little helpers
+
+Libs\Libs.xml
+Locales\Locales.xml
+
+Helper.lua
+Config.lua
+
+Classes\Classes.xml
+
+Init.lua

@@ -1,0 +1,7 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Warlock/Setup.lua"/>
+	<Script file="Warlock/Localization.lua"/>
+	<Script file="Warlock/Soulshard.lua"/>
+	<Script file="Warlock/Macro.lua"/>
+	<Script file="Warlock/Init.lua"/>
+</Ui>
