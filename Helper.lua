@@ -1,8 +1,7 @@
 local addon, ns = ...
-	ns[1] = {} -- C, config
-	ns[2] = {} -- F, functions, constants, variables
-	ns[3] = {} -- G, globals (Optionnal)
-
+ns[1] = {} -- C, config
+ns[2] = {} -- F, functions, constants, variables
+ns[3] = {} -- G, globals (Optionnal)
 
 local C, F, G = unpack(ns)
 

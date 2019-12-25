@@ -139,8 +139,6 @@ local function SortShards()
 				-- Maybe: GetFirstFreePos
 				PickupContainerItem(srcBag, srcSlot)
 				PickupContainerItem(destBag, destSlot)
-				-- print("Swapping:", srcBag, ", ", srcSlot, "to",  destBag, ", ", destSlot)
-				-- print("CursorHasItem:", CursorHasItem())
 			end
 
 			srcBag, srcSlot = GetSource()
@@ -194,10 +192,6 @@ local function InitBags()
 		local free, total = 0, 0
 		local bagName, bagType, bagSubType, isBackpack, isSoulpouchBag, canHoldSoulShard
 		bagName = GetBagName(i);
-
-		-- print("")
-		-- print("|c00FFCC00bagName|r", i, bagName)
-		-- print("")
 
 		if bagName ~= nil then
 			isBackpack = i == 0 and true or false
@@ -293,9 +287,6 @@ end
 local function onevent(self, event, arg1, ...)
 
 		if(login and ((event == "ADDON_LOADED" and addon == arg1) or (event == "PLAYER_LOGIN"))) then
-				-- print("")
-				-- print("|c00FFCC00ADDON_LOADED()|r", arg1)
-				-- print("")
 				login = nil
         Init()
 				f:UnregisterEvent("ADDON_LOADED")
@@ -306,30 +297,14 @@ local function onevent(self, event, arg1, ...)
 			if(baginit) then
 				InitBags()
 			elseif(onceafterbaginit) then
-				-- print("-- --------------------------------")
-				-- for key,value in F.orderedPairs(BAGS) do
-				-- 	FREE = FREE + value.free
-				-- 	print("")
-				-- 	print("|c00FFCC00Bag|r", key, value.name)
-				-- 	--F.tprint(value.name)
-				-- 	print("-- --------------------------------")
-				-- end
-
 				if( not sortprogress ) then
 					SortShards()
 				end
-
 				onceafterbaginit = nil
 			end
-			-- print("")
-			-- print("|c00FFCC00BAG_UPDATE()|r")
-			-- print("")
 		end
 
 		if(event == "PLAYER_REGEN_ENABLED") then
-			-- print("")
-			-- print("|c00FFCC00PLAYER_REGEN_ENABLED()|r")
-			-- print("")
 			local soulShardCount = GetItemCount(soulShardItemID)
 			if( soulShardCount > TOTAL_SHARDS ) then
 				sortnotdone = true

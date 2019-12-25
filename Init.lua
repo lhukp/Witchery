@@ -4,18 +4,16 @@ local C, F, G = unpack(ns)
 local L = LibStub("AceLocale-3.0"):GetLocale(addon)
 
 local function WitcheryCmds(msg, editbox)
-	-- pattern matching that skips leading whitespace and whitespace between cmd and args
-	-- any whitespace at end of args is retained
 	local _, _, cmd, args = string.find(msg, "%s?(%w+)%s?(.*)")
 
-  if cmd == nil then
-  	print(format(G.caF.." command list:", addon))
-  elseif tonumber(cmd) ~= nil then
-  	print("command is:", cmd)
-  else
-    print("cmd:", cmd)
-    print("args:", args)
-  end
+	if cmd == nil then
+		print(format(G.caF.." command list:", addon))
+	elseif tonumber(cmd) ~= nil then
+		print("command is:", cmd)
+	else
+	  print("cmd:", cmd)
+	  print("args:", args)
+	end
 end
 
 -- Witchery slashhandlers

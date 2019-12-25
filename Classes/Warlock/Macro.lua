@@ -63,15 +63,13 @@ local function GetDemonMacroName(str)
 end
 
 local function PlaceActionMacro(macroName, slotId)
-    --print(addonname .. ": macroName: " .. macroName)
-    --print(addonname .. ": slotId: " .. slotId)
     if GetActionInfo(slotId) ~= nil then
         PickupAction(slotId)
         ClearCursor()
     end
     PickupMacro(macroName, slotId)
     PlaceAction(slotId)
-    -- no macro? try all-for-one-macro
+    -- no macro? try fallback-macro
     if GetActionInfo(slotId) == nil then
         PickupMacro(conf.fallbackMacro .. tostring(slotId))
         PlaceAction(slotId)
@@ -79,8 +77,6 @@ local function PlaceActionMacro(macroName, slotId)
 end
 
 local function PlaceMinionActionMacro(macroName, slotId)
-    --print(addonname .. ": macroName: " .. macroName)
-    --print(addonname .. ": slotId: " .. slotId)
     if type(slotId) == "number" then slotId = {conf.slotId} end
     if type(slotId) == "table" then
         for k,v in pairs(slotId) do
@@ -90,8 +86,6 @@ local function PlaceMinionActionMacro(macroName, slotId)
 end
 
 local function PlaceMinionMacro(family)
-    --print(addonname .. ": Minion is " .. family)
-    --DEFAULT_CHAT_FRAME:AddMessage("PlaceMinionMacro() inCombat is " .. tostring(inCombat))
     if inCombat == true then return end
 
     if family == DEMON_IMP or
@@ -102,15 +96,10 @@ local function PlaceMinionMacro(family)
        family == DEMON_INFERNO or
        family == DEMON_DOOMGUARD then
         PlaceMinionActionMacro(string.lower(family), conf.slotId)
-        --MinionSetup(string.lower(family))
-    else
-        -- Do nothing
     end
 end
 
 local function MinionDismissedCallback()
-    --print(addonname .. ": Minion dismissed")
-    --DEFAULT_CHAT_FRAME:AddMessage("MinionDismissedCallback() inCombat is " .. tostring(inCombat))
     if inCombat == true then return end
 
     slotId = conf.slotId
@@ -124,12 +113,6 @@ local function MinionDismissedCallback()
 end
 
 local function ActionbarHasMacro()
-
-  --PickupAction(63)
-  --macro, index = GetCursorInfo()
-  --print("macro", macro)
-  --print("index", index)
-
   slotId = conf.slotId
   local hasMacro = false
   if type(slotId) == "number" then slotId = {conf.slotId} end
@@ -147,27 +130,20 @@ local function ActionbarHasMacro()
 end
 
 local function MinionChangedCallback(guid)
-    --DEFAULT_CHAT_FRAME:AddMessage(addonname .. ": MinionChangedCallback()")
-    --print(addonname .. " <guid>:", guid)
     if guid == nil then
         MinionDismissedCallback()
     else
-        --print(addonname .. ": newGUID is " .. guid)
         local family = UnitCreatureFamily("pet")
         PlaceMinionMacro(family);
     end
 end
 
 local function EnteringCombatCallback()
-    --DEFAULT_CHAT_FRAME:AddMessage(addonname .. ": entering combat")
     inCombat = true
-    --DEFAULT_CHAT_FRAME:AddMessage(addonname .. ": inCombat is " .. tostring(inCombat))
 end
 
 local function LeavingCombatCallback()
-    --DEFAULT_CHAT_FRAME:AddMessage(addonname .. ": leaving combat")
     inCombat = false
-    --DEFAULT_CHAT_FRAME:AddMessage(addonname .. ": inCombat is " .. tostring(inCombat))
     MinionChangedCallback(UnitGUID("pet"))
 end
 
@@ -205,7 +181,6 @@ f:Hide()
 
 function f:UNIT_PET(unit)
     local newGUID = UnitGUID("pet")
-    --print(addonname .. "     <newGUID>:", newGUID)
     if newGUID ~= MINION_GUID or not ActionbarHasMacro() then
         MinionChangedCallback(newGUID)
         MINION_GUID = newGUID
@@ -214,7 +189,6 @@ end
 
 function f:PLAYER_ENTERING_WORLD()
     MINION_GUID = UnitGUID("pet")
-    --print(addonname .. " <MINION_GUID>:", MINION_GUID)
     f:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end
 

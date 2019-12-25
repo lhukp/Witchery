@@ -1,6 +1,5 @@
 local addon, ns = ...
 local C, F, G = unpack(ns)
-
 --[[
 None = 0
 Warrior = 1
@@ -19,7 +18,7 @@ Demon Hunter = 12
 local localizedClass, englishClass, classIndex = UnitClass("player");
 
 G.caF = "|cff00FFFF%s|r"
-G.Ccolors = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[englishClass] -- Class color
+G.Ccolors = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[englishClass]
 
 C.LocalizedClass = localizedClass
 C.EnglishClass = englishClass
