@@ -55,7 +55,7 @@ To start client support, eg. ticket
 This Addon can handle Soul Shards.
 
 Soul Shards are always sorted from your left outer bag to your rucksack.
-Soul pouches are supported but not preferred, so best practice is placing your soul pouch as your the left outer bag.
+Soul pouches are supported but not preferred, so best practice is placing your soul pouch as your left outer bag.
 
 Soul Shards are sorted at login and when a new Soul Shard is created. Also a slash command is provided to sort manually.
 ```
