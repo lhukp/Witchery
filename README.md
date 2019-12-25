@@ -24,7 +24,7 @@ Should make your gaming experience easier.
 
 ### Slash commands (general)
 
-This addon provids the following general slash commands.
+This addon provides the following general slash commands.
 
 To reload the UI
 ```
@@ -46,11 +46,11 @@ To start client support, eg. ticket
 /gm
 ```
 
-## Supported Casses
+## Supported Classes
 
 ### Warlock
 
-The Warlock module is loaded only, when your class is a Warlock. You can manually turn off components you do not need/like. This can easily done in the [Warlock setup LUA file](Classes/Warlock/Setup.lua).
+The Warlock module is loaded only, when your class is a Warlock. You can manually turn off components you do not need/like. This can easily be done in the [Warlock setup LUA file](Classes/Warlock/Setup.lua).
 
 Enables the Warlock module, use `false` to disable.
 ```
@@ -75,7 +75,7 @@ Soul Shards are sorted at login and when a new Soul Shard is created. Also a sla
 /wss sort
 ```
 
-You can also us a shortcut.
+You can also use a shortcut.
 ```
 /wss s
 ```
@@ -134,7 +134,7 @@ You can also use macro fallback, if you need 1 macro for all pets. In this case 
 To illustrate this, my config uses 2 slots, one macro for all pets that handles attack/stop. The second slot holds specific pet abilities macro like `Seduce`, `Devour Magic`, `Sacrifice`, ...
 
 Slots I am using are `61` and `62`.
-So my macros named:
+So my macros are named:
 - `pet61` for *all pets*, equipped to slot id *61*
 - `imp62` for *Imp*, equipped to slot id *62*
 - `vwr62` for *Voidwalker*, equipped to slot id *62*
