@@ -99,19 +99,19 @@ E.g. for single slot/macro
 ```
 C.Warlock.Macro.slotId = 61
 ```
-> Use this to find the right slots
+**Use this to find the right slots**
 
-*ActionBar page 1: slots 1 to 12*
+> *ActionBar page 1: slots 1 to 12*
 
-*ActionBar page 2: slots 13 to 24*
+> *ActionBar page 2: slots 13 to 24*
 
-*ActionBar page 3 (Right ActionBar): slots 25 to 36*
+> *ActionBar page 3 (Right ActionBar): slots 25 to 36*
 
-*ActionBar page 4 (Right ActionBar 2): slots 37 to 48*
+> *ActionBar page 4 (Right ActionBar 2): slots 37 to 48*
 
-*ActionBar page 5 (Bottom Right ActionBar): slots 49 to 60*
+> *ActionBar page 5 (Bottom Right ActionBar): slots 49 to 60*
 
-*ActionBar page 6 (Bottom Left ActionBar): slots 61 to 72*
+> *ActionBar page 6 (Bottom Left ActionBar): slots 61 to 72*
 
 
 **Find the right name for your macros**
