@@ -18,9 +18,9 @@ end
 
 -- Witchery slashhandlers
 
-SlashCmdList["WITCHERY"] = WitcheryCmds
-SLASH_WITCHERY1 = "/witchery"
-SLASH_WITCHERY2 = "/wry"
+-- SlashCmdList["WITCHERY"] = WitcheryCmds
+-- SLASH_WITCHERY1 = "/witchery"
+-- SLASH_WITCHERY2 = "/wry"
 
 -- Usefull slashhandlers
 
