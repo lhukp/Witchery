@@ -59,6 +59,8 @@ C.Warlock.Enabled = true
 
 #### Soul Shards
 
+##### Sort
+
 This Addon can handle Soul Shards.
 
 Enables the [***Warlock Soul Shard*** module](Classes/Warlock/Setup.lua), use `false` to disable. `C.Warlock.Enabled` has to be `true`.
@@ -74,11 +76,22 @@ Soul Shards are sorted at login and when a new Soul Shard is created. Also a sla
 ```
 /wss sort
 ```
-
-You can also use a shortcut.
+You can also use a the shortcut `/wss s`.
 ```
 /wss s
 ```
+##### Destory
+
+You are able to destroy 1 to n Souk Shard with a simple command, no need to open bags anymore. Use
+```
+/wss dell
+```
+to detroy 1 Soul Shard, or
+```
+/wss dell {n}
+```
+where `{n}` stand for the number of Soul Shards you would like to destroy. Use the shortcut `/wss d` or `/wss d {n}` if you like.
+
 #### Macros
 
 This Addon can handle macros for your pets.

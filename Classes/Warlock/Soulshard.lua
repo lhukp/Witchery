@@ -7,6 +7,7 @@ if not( C.Warlock.Enabled and C.Warlock.Soulshard.Enabled ) then return end
 local L = LibStub("AceLocale-3.0"):GetLocale(addon)
 local f = CreateFrame("Frame", addon..C.RealClass.."Soulshard", UIParent)
 
+local init = true
 local login = true
 local baginit = true
 local sortnotdone = true
@@ -37,18 +38,18 @@ local BAGS = {}
 --
 
 local function ShardCount()
-	SoulShardLabel = select(1,GetItemInfo(SoulShardItemID))
+	local SoulShardLabel = select(1,GetItemInfo(soulShardItemID))
 	if SoulShardLabel ~= nil then
-		SoulShardCount = GetItemCount(SoulShardItemID)
+		SoulShardCount = GetItemCount(soulShardItemID)
 		TOTAL_SHARDS = SoulShardCount
 	end
 end
 
-local GetShardCount()
-	SoulShardLabel = select(1,GetItemInfo(SoulShardItemID))
+local function GetShardCount()
+	local SoulShardLabel = select(1,GetItemInfo(soulShardItemID))
 	if SoulShardLabel ~= nil then
-		SoulShardCount = GetItemCount(SoulShardItemID)
-		return = SoulShardCount
+		SoulShardCount = GetItemCount(soulShardItemID)
+		return SoulShardCount
 	end
 	return nil
 end
@@ -178,7 +179,9 @@ local function GetLastSlot()
 	local b, s
 	for bag = 0, NUM_BAG_SLOTS do
 
-		if type(GetContainerNumSlots(bag)) == "number" then
+		-- print("GetContainerNumSlots", GetContainerNumSlots(bag))
+
+		if(type(GetContainerNumSlots(bag)) == "number") then
 			b = bag
 			s = GetContainerNumSlots(bag)
 			-- Calculate free slots
@@ -189,15 +192,14 @@ local function GetLastSlot()
 		end
 
 	end
-
+	-- print ("b", b)
+	-- print ("s", s)
 	return {b, s}
 end
 
 local function Init()
-
 	FREE, TOTAL_SHARDS = 0, 0
 	LAST_SLOT = GetLastSlot()
-
 end
 
 local function InitBags()
@@ -302,6 +304,11 @@ end
 
 local function onevent(self, event, arg1, ...)
 
+	if(init ) then
+		init = nil
+		Init()
+	end
+
 	if(event ~= "PLAYER_REGEN_ENABLED") then
 		ShardCount()
 	end
@@ -309,7 +316,6 @@ local function onevent(self, event, arg1, ...)
 	--if(login and ((event == "ADDON_LOADED" and addon == arg1) or (event == "PLAYER_LOGIN"))) then
 	if(login and ((event == "ADDON_LOADED" and addon == arg1) or (event == "PLAYER_ENTERING_WORLD"))) then
 		login = nil
-		Init()
 		f:UnregisterEvent("ADDON_LOADED")
 		f:UnregisterEvent("PLAYER_LOGIN")
 	end
