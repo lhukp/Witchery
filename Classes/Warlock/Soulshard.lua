@@ -36,7 +36,7 @@ local BAGS = {}
 -- local functions
 --
 
-local ShardCount()
+local function ShardCount()
 	SoulShardLabel = select(1,GetItemInfo(SoulShardItemID))
 	if SoulShardLabel ~= nil then
 		SoulShardCount = GetItemCount(SoulShardItemID)
