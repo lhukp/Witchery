@@ -36,6 +36,14 @@ local BAGS = {}
 -- local functions
 --
 
+local ShardCount()
+	SoulShardLabel = select(1,GetItemInfo(SoulShardItemID))
+	if SoulShardLabel ~= nil then
+		SoulShardCount = GetItemCount(SoulShardItemID)
+		TOTAL_SHARDS = SoulShardCount
+	end
+end
+
 local GetShardCount()
 	SoulShardLabel = select(1,GetItemInfo(SoulShardItemID))
 	if SoulShardLabel ~= nil then
@@ -295,10 +303,7 @@ end
 local function onevent(self, event, arg1, ...)
 
 	if(event ~= "PLAYER_REGEN_ENABLED") then
-		local count = GetShardCount()
-		if(count ~= nil) then
-			TOTAL_SHARDS = count
-		end
+		ShardCount()
 	end
 
 	--if(login and ((event == "ADDON_LOADED" and addon == arg1) or (event == "PLAYER_LOGIN"))) then
@@ -322,10 +327,11 @@ local function onevent(self, event, arg1, ...)
 
 	if(event == "PLAYER_REGEN_ENABLED") then
 		local soulShardCount = GetShardCount()
-		if( soulShardCount != TOTAL_SHARDS ) then
+		if( soulShardCount > TOTAL_SHARDS ) then
 			sortnotdone = true
 			if( not sortprogress ) then
 				SortShards()
+				ShardCount()
 			end
 		end
 	end
