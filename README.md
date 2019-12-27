@@ -82,7 +82,7 @@ You can also use a the shortcut `/wss s`.
 ```
 ##### Destory
 
-You are able to destroy 1 to n Souk Shard with a simple command, no need to open bags anymore. Use
+You are able to destroy 1 to n Soul Shard with a simple command, no need to open bags anymore. Use
 ```
 /wss dell
 ```
