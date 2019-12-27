@@ -36,6 +36,15 @@ local BAGS = {}
 -- local functions
 --
 
+local GetShardCount()
+	SoulShardLabel = select(1,GetItemInfo(SoulShardItemID))
+	if SoulShardLabel ~= nil then
+		SoulShardCount = GetItemCount(SoulShardItemID)
+		return = SoulShardCount
+	end
+	return nil
+end
+
 local function GetFirstFreePos()
 	for bag=0,NUM_BAG_SLOTS,1 do
 		for slot=1,GetContainerNumSlots(bag),1 do
@@ -285,7 +294,15 @@ end
 
 local function onevent(self, event, arg1, ...)
 
-	if(login and ((event == "ADDON_LOADED" and addon == arg1) or (event == "PLAYER_LOGIN"))) then
+	if(event ~= "PLAYER_REGEN_ENABLED") then
+		local count = GetShardCount()
+		if(count ~= nil) then
+			TOTAL_SHARDS = count
+		end
+	end
+
+	--if(login and ((event == "ADDON_LOADED" and addon == arg1) or (event == "PLAYER_LOGIN"))) then
+	if(login and ((event == "ADDON_LOADED" and addon == arg1) or (event == "PLAYER_ENTERING_WORLD"))) then
 		login = nil
 		Init()
 		f:UnregisterEvent("ADDON_LOADED")
@@ -304,8 +321,8 @@ local function onevent(self, event, arg1, ...)
 	end
 
 	if(event == "PLAYER_REGEN_ENABLED") then
-		local soulShardCount = GetItemCount(soulShardItemID)
-		if( soulShardCount > TOTAL_SHARDS ) then
+		local soulShardCount = GetShardCount()
+		if( soulShardCount != TOTAL_SHARDS ) then
 			sortnotdone = true
 			if( not sortprogress ) then
 				SortShards()
@@ -315,9 +332,10 @@ local function onevent(self, event, arg1, ...)
 
 end
 
+f:RegisterEvent("GET_ITEM_INFO_RECEIVED")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:RegisterEvent("PLAYER_REGEN_ENABLED")
-f:RegisterEvent("ADDON_LOADED")
-f:RegisterEvent("PLAYER_LOGIN")
+-- f:RegisterEvent("PLAYER_LOGIN")
 f:RegisterEvent("BAG_UPDATE")
 f:SetScript("OnEvent", onevent)
 f:Hide()
