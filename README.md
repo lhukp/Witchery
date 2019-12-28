@@ -59,14 +59,14 @@ C.Warlock.Enabled = true
 
 #### Soul Shards
 
-##### Sort
-
 This Addon can handle Soul Shards.
 
 Enables the [***Warlock Soul Shard*** module](Classes/Warlock/Setup.lua), use `false` to disable. `C.Warlock.Enabled` has to be `true`.
 ```
 C.Warlock.Soulshard.Enabled = true
 ```
+
+##### Sort
 
 Soul Shards are always sorted from your left outer bag to your backpack. Soul pouches are supported but not preferred.
 
@@ -77,9 +77,7 @@ Soul Shards are sorted at login and when a new Soul Shard is created. Also a sla
 /wss sort
 ```
 You can also use a the shortcut `/wss s`.
-```
-/wss s
-```
+
 ##### Destory
 
 You are able to destroy 1 to n Soul Shard with a simple command, no need to open bags anymore. Use
