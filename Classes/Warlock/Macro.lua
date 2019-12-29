@@ -111,6 +111,8 @@ local function MinionDismissedCallback()
 end
 
 local function ActionbarHasMacro()
+  if inCombat == true then return end;
+
   slotId = conf.slotId
   local hasMacro = false
   if type(slotId) == "number" then slotId = {conf.slotId} end

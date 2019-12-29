@@ -68,9 +68,9 @@ C.Warlock.Soulshard.Enabled = true
 
 ##### Sort
 
-Soul Shards are always sorted from your left outer bag to your backpack. Soul pouches are supported but not preferred.
+Soul Shards are always sorted from your leftmost bag to your backpack. Soul pouches are supported but not preferred.
 
-> Best practice is placing your soul pouch as the left outer bag.
+> Best practice is placing your soul pouch as the leftmost bag.
 
 Soul Shards are sorted at login and when a new Soul Shard is created. Also a slash command is provided to sort manually.
 ```
